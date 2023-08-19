@@ -1,0 +1,44 @@
+﻿﻿@using EFModel = BankingEx.EFModels
+
+@model BankingEx.EFModels.Account
+<h4>Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Balance" class="control-label"></label>
+                <input asp-for="Balance" class="form-control" />
+                <span asp-validation-for="Balance" class="text-danger"></span>
+            </div>
+            <div class="form-group form-radio">
+                <label class="control-label">Account Type : </label>
+                <input type="radio" name="Type" value="false" /> Savings Account
+                <input type="radio" name="Type" value="true" /> Current Account
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select name="CustomerId">
+                    @foreach (EFModel.Customer customer in ViewBag.Customers)
+                    {
+                    <option value="@customer.Id">@customer.Name-@customer.PanNumber</option>
+                    }
+                </select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+               </div>
+                   <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+        </form>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
